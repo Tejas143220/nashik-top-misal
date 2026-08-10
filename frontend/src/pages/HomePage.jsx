@@ -25,8 +25,11 @@ export const HomePage = () => {
 
   useEffect(() => {
     fetchShops({ limit: 6, sort_by: 'recommended' })
-      .then((res) => setFeaturedShops(res.items || []))
-      .catch(() => {})
+      .then((res) => {
+        const list = Array.isArray(res) ? res : Array.isArray(res?.items) ? res.items : [];
+        setFeaturedShops(list);
+      })
+      .catch(() => setFeaturedShops([]))
       .finally(() => setLoading(false));
   }, []);
 

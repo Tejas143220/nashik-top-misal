@@ -78,7 +78,7 @@ export const ShopList = () => {
 
       {/* Grid of Shop Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {shopsData.items.map((shop, index) => (
+        {(Array.isArray(shopsData?.items) ? shopsData.items : []).map((shop, index) => (
           <React.Fragment key={shop.id}>
             <ShopCard shop={shop} />
 

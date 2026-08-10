@@ -14,10 +14,10 @@ app = FastAPI(
     description="Production-ready REST API for Nashik's Best Misal Directory & Review Platform."
 )
 
-# Set up CORS middleware
+# Set up CORS middleware to allow Vercel previews & production domains
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.BACKEND_CORS_ORIGINS,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
