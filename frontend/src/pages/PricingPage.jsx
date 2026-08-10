@@ -292,7 +292,7 @@ export const PricingPage = () => {
                   <hr className="border-slate-100 my-6" />
 
                   <ul className="space-y-3 mb-8">
-                    {plan.features.map((feat, idx) => (
+                    {(Array.isArray(plan?.features) ? plan.features : []).map((feat, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                         <span>{feat}</span>

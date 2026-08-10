@@ -104,7 +104,7 @@ export const HomePage = () => {
             <BoilingCurryLoader message="Cooking Nashik's featured misal listings..." />
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredShops.map((shop) => (
+              {(Array.isArray(featuredShops) ? featuredShops : []).map((shop) => (
                 <ShopCard key={shop.id} shop={shop} />
               ))}
             </div>

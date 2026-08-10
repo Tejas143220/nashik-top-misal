@@ -41,7 +41,7 @@ export const PerksSection = () => {
 
       {/* Coupons Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {coupons.map((item) => (
+        {(Array.isArray(coupons) ? coupons : []).map((item) => (
           <div
             key={item.id}
             className="bg-white rounded-3xl p-6 border border-amber-200 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between relative overflow-hidden group"
