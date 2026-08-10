@@ -20,7 +20,7 @@ export const ShopOverview = ({ shop }) => {
             Highlights & Special Activities
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {shop.activities.map((act) => (
+            {(Array.isArray(shop?.activities) ? shop.activities : []).map((act) => (
               <div
                 key={act.id}
                 className="flex items-center gap-2 p-3 bg-amber-50/60 rounded-xl border border-amber-200/60 text-xs font-bold text-slate-800"

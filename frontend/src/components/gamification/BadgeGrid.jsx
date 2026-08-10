@@ -12,7 +12,7 @@ export const BadgeGrid = ({ badges = [] }) => {
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      {badges.map((badge) => {
+      {(Array.isArray(badges) ? badges : []).map((badge) => {
         const IconComponent = iconMap[badge.icon] || Award;
         return (
           <motion.div

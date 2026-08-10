@@ -162,7 +162,7 @@ export const ShopFilter = () => {
           className="w-full text-xs font-semibold bg-amber-50/70 border border-amber-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           <option value="">All Areas across Nashik</option>
-          {areas.map((area) => (
+          {(Array.isArray(areas) ? areas : []).map((area) => (
             <option key={area} value={area}>
               {area}
             </option>
@@ -171,7 +171,7 @@ export const ShopFilter = () => {
       </div>
 
       {/* Amenities / Activities */}
-      {activities.length > 0 && (
+      {(Array.isArray(activities) ? activities : []).length > 0 && (
         <div>
           <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
             Special Facilities
@@ -182,7 +182,7 @@ export const ShopFilter = () => {
             className="w-full text-xs font-semibold bg-amber-50/70 border border-amber-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             <option value="">All Facilities</option>
-            {activities.map((act) => (
+            {(Array.isArray(activities) ? activities : []).map((act) => (
               <option key={act.id} value={act.slug}>
                 {act.name}
               </option>

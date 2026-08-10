@@ -249,7 +249,7 @@ export const PricingPage = () => {
 
         {/* Pricing Tier Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {plans.map((plan) => {
+          {(Array.isArray(plans) ? plans : []).map((plan) => {
             const IconComp = plan.icon;
             const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
             const priceFormatted = price.toLocaleString('en-IN');
@@ -432,7 +432,7 @@ export const PricingPage = () => {
                       className="w-full px-3.5 py-2.5 bg-white border border-amber-300 rounded-xl text-xs font-bold focus:ring-2 focus:ring-brand-500"
                     >
                       <option value="">-- Select Misal Shop Joint --</option>
-                      {shops.map((s) => (
+                      {(Array.isArray(shops) ? shops : []).map((s) => (
                         <option key={s.id} value={s.id}>{s.name} ({s.area})</option>
                       ))}
                     </select>

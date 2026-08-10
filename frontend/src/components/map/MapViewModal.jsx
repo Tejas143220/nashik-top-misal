@@ -54,7 +54,7 @@ export const MapViewModal = ({ isOpen, onClose, shops = [] }) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {shops.map((shop) => (
+            {(Array.isArray(shops) ? shops : []).map((shop) => (
               <Marker
                 key={shop.id}
                 position={[shop.latitude || 20.0059, shop.longitude || 73.7898]}

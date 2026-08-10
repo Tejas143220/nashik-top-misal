@@ -31,7 +31,7 @@ export const ReviewSection = ({ reviews = [], avgRating = 0, totalReviews = 0, o
         </div>
       ) : (
         <div className="space-y-4">
-          {reviews.map((rev) => (
+          {(Array.isArray(reviews) ? reviews : []).map((rev) => (
             <div key={rev.id} className="p-4 bg-amber-50/40 rounded-2xl border border-amber-100 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
