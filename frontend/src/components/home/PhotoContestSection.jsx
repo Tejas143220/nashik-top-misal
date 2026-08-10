@@ -62,7 +62,7 @@ export const PhotoContestSection = () => {
 
       {/* Contest Entries Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {contest.entries.map((entry) => {
+        {(Array.isArray(contest?.entries) ? contest.entries : []).map((entry) => {
           const hasVoted = upvotedIds.includes(entry.id);
           return (
             <div

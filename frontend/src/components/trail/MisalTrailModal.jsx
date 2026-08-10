@@ -161,7 +161,7 @@ export const MisalTrailModal = ({ isOpen, onClose }) => {
             {activeTab === 'curated' ? (
               <div className="space-y-3">
                 <h4 className="text-xs font-black uppercase text-slate-400 tracking-wider">Select a Curated Trail</h4>
-                {curatedTrails.map((trail) => (
+                {(Array.isArray(curatedTrails) ? curatedTrails : []).map((trail) => (
                   <button
                     key={trail.id}
                     onClick={() => setSelectedTrail(trail)}
@@ -188,7 +188,7 @@ export const MisalTrailModal = ({ isOpen, onClose }) => {
                 
                 {/* Active Selected Stops */}
                 <div className="space-y-2">
-                  {currentDisplayShops.map((shop, idx) => (
+                  {(Array.isArray(currentDisplayShops) ? currentDisplayShops : []).map((shop, idx) => (
                     <div key={shop.id} className="p-3 bg-amber-50 rounded-xl border border-amber-200 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="w-6 h-6 rounded-full bg-brand-600 text-white font-black text-xs flex items-center justify-center">
@@ -275,7 +275,7 @@ export const MisalTrailModal = ({ isOpen, onClose }) => {
                 />
               )}
 
-              {currentDisplayShops.map((shop, idx) => (
+              {(Array.isArray(currentDisplayShops) ? currentDisplayShops : []).map((shop, idx) => (
                 <Marker
                   key={shop.id}
                   position={[shop.latitude || 20.0059, shop.longitude || 73.7898]}

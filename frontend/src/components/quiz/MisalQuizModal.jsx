@@ -217,7 +217,7 @@ export const MisalQuizModal = ({ isOpen, onClose }) => {
               </div>
 
               <div className="space-y-4">
-                {results.map((res) => (
+                {(Array.isArray(results) ? results : []).map((res) => (
                   <div key={res.shop.id} className="p-3 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-2">
                     <div className="flex items-center justify-between text-xs font-extrabold">
                       <span className="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">

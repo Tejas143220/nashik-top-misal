@@ -324,7 +324,7 @@ export const MerchantDashboardPage = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-amber-100 font-semibold text-slate-800">
-                    {analytics.recent_redemptions.map((item, i) => (
+                    {(Array.isArray(analytics?.recent_redemptions) ? analytics.recent_redemptions : []).map((item, i) => (
                       <tr key={i} className="hover:bg-amber-50/50">
                         <td className="py-3 px-3 font-black text-brand-600">{item.voucher_code}</td>
                         <td className="py-3 px-3">{item.customer_name}</td>
