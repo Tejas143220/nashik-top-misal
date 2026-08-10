@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/venv/
+backend/env/
+backend/__pycache__/
+*.pyc
+
+# Build outputs
+frontend/dist/
+frontend/build/
+
+# Environment files
+.env
+*.env.local
+
+# Database / SQLite temporary files
+*.sqlite3-journal
+*.db-journal
+
+# IDE / Editor files
+.vscode/
+.idea/
+.DS_Store
