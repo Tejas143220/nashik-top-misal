@@ -6,9 +6,11 @@ import TopFiveRankCardModal from '../share/TopFiveRankCardModal';
 
 export const PassportCard = ({ passport }) => {
   const [isTopFiveOpen, setIsTopFiveOpen] = useState(false);
-  if (!passport) return null;
 
-  const totalStamps = passport.total_stamps || 0;
+  const userName = passport?.user_name || "Nashik Foodie";
+  const stampsList = passport?.stamps || [];
+  const badgesList = passport?.badges || [];
+  const totalStamps = passport?.total_stamps || stampsList.length || 0;
 
   // Level Rank Calculation
   let levelName = "Rookie Misal Explorer 🧭";
@@ -39,7 +41,7 @@ export const PassportCard = ({ passport }) => {
 
   const handleWhatsAppShare = () => {
     const text = encodeURIComponent(
-      `🏆 My Official Nashik Misal Passport!\nName: ${passport.user_name}\nRank: Level ${currentLevel} - ${levelName}\nStamps Collected: ${totalStamps} 🏷️\nCheck out Nashik's Best Misal Guide: https://nashikmisal.in/`
+      `🏆 My Official Nashik Misal Passport!\nName: ${userName}\nRank: Level ${currentLevel} - ${levelName}\nStamps Collected: ${totalStamps} 🏷️\nCheck out Nashik's Best Misal Guide: https://nashikmisal.in/`
     );
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
   };
@@ -56,13 +58,13 @@ export const PassportCard = ({ passport }) => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10 border-b border-slate-700 pb-6">
           <div className="flex items-center gap-3">
             <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-500 to-amber-400 text-slate-950 font-black text-xl flex items-center justify-center shadow-lg border-2 border-amber-300 shrink-0">
-              {passport.user_name.charAt(0)}
+              {userName.charAt(0)}
             </div>
             <div>
               <span className="text-[10px] font-black uppercase tracking-widest text-amber-400">
                 OFFICIAL NASHIK MISAL PASSPORT
               </span>
-              <h2 className="text-xl sm:text-2xl font-black text-white">{passport.user_name}</h2>
+              <h2 className="text-xl sm:text-2xl font-black text-white">{userName}</h2>
               <span className="text-xs text-amber-300 font-extrabold flex items-center gap-1 mt-0.5">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Level {currentLevel}: {levelName}
               </span>
@@ -172,19 +174,19 @@ export const PassportCard = ({ passport }) => {
           <h3 className="text-xs font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
             <Award className="w-4 h-4" /> Unlocked Achievement Badges
           </h3>
-          <BadgeGrid badges={passport.badges} />
+          <BadgeGrid badges={badgesList} />
         </div>
 
         {/* Stamps Visited Grid */}
         <div className="space-y-3 relative z-10 pt-4 border-t border-slate-700">
           <h3 className="text-xs font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
-            <Stamp className="w-4 h-4" /> Stamp Collection ({passport.stamps.length})
+            <Stamp className="w-4 h-4" /> Stamp Collection ({stampsList.length})
           </h3>
-          {passport.stamps.length === 0 ? (
+          {stampsList.length === 0 ? (
             <p className="text-xs text-slate-400 italic">No stamps collected yet. Write a review to earn your first stamp!</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {passport.stamps.map((stamp) => (
+              {stampsList.map((stamp) => (
                 <div
                   key={stamp.id}
                   className="p-3 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 flex items-center gap-3"
@@ -194,7 +196,7 @@ export const PassportCard = ({ passport }) => {
                   </div>
                   <div>
                     <h4 className="text-xs font-extrabold text-white">{stamp.shop_name}</h4>
-                    <span className="text-[10px] text-amber-200">{stamp.shop_area}, Nashik</span>
+                    <span className="text-[10px] text-amber-200">{stamp.shop_area || 'Nashik'}, Nashik</span>
                   </div>
                 </div>
               ))}
