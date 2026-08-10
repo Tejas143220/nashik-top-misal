@@ -1,9 +1,11 @@
 {
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
   "framework": "vite",
   "rewrites": [
     {
       "source": "/api/v1/:path*",
-      "destination": "https://nashik-top-misal.onrender.com/api/v1/:path*"
+      "destination": "https://nashik-top-misal.onrender.com"
     },
     {
       "source": "/(.*)",
