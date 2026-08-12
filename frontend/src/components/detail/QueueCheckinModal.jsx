@@ -96,10 +96,12 @@ export const QueueCheckinModal = ({ isOpen, onClose, shop, onCheckinSuccess }) =
 
           {/* Crowd Level */}
           <div>
-            <label className="block text-xs font-black uppercase text-slate-500 mb-1 flex items-center gap-1">
+            <label htmlFor="queue-crowd-level" className="block text-xs font-black uppercase text-slate-500 mb-1 flex items-center gap-1">
               <Users className="w-4 h-4 text-brand-600" /> Crowd Level
             </label>
             <select
+              id="queue-crowd-level"
+              name="crowdLevel"
               value={selectedCrowd}
               onChange={(e) => setSelectedCrowd(e.target.value)}
               className="w-full p-2.5 bg-amber-50/60 border border-amber-200 rounded-xl text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
@@ -113,10 +115,12 @@ export const QueueCheckinModal = ({ isOpen, onClose, shop, onCheckinSuccess }) =
 
           {/* Optional Note */}
           <div>
-            <label className="block text-xs font-black uppercase text-slate-500 mb-1 flex items-center gap-1">
+            <label htmlFor="queue-note-comment" className="block text-xs font-black uppercase text-slate-500 mb-1 flex items-center gap-1">
               <MessageSquare className="w-4 h-4 text-brand-600" /> Live Update Note (Optional)
             </label>
             <input
+              id="queue-note-comment"
+              name="queueComment"
               type="text"
               placeholder="e.g., Wood stove active, 10 table queue!"
               value={comment}

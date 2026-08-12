@@ -179,10 +179,12 @@ export const SubmitShopPage = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-shop-name" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Misal Shop Name *
                   </label>
                   <input
+                    id="submit-shop-name"
+                    name="shopName"
                     type="text"
                     required
                     placeholder="e.g. Hotel Samrat Misal"
@@ -192,10 +194,12 @@ export const SubmitShopPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-tagline" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Tagline / Speciality
                   </label>
                   <input
+                    id="submit-tagline"
+                    name="tagline"
                     type="text"
                     placeholder="e.g. Famous for Extra Zanzanit Sample & Jalebi"
                     value={formData.tagline}
@@ -207,10 +211,12 @@ export const SubmitShopPage = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-phone" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Mobile Phone Number
                   </label>
                   <input
+                    id="submit-phone"
+                    name="phone"
                     type="tel"
                     placeholder="+91 98220 XXXXX"
                     value={formData.phone}
@@ -219,10 +225,12 @@ export const SubmitShopPage = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-area" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Select Area in Nashik *
                   </label>
                   <select
+                    id="submit-area"
+                    name="area"
                     value={formData.area}
                     onChange={(e) => setFormData({ ...formData, area: e.target.value })}
                     className="w-full text-xs bg-amber-50/50 border border-amber-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 font-semibold"
@@ -240,10 +248,12 @@ export const SubmitShopPage = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-spicy-level" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Spicy Level (1 to 5)
                   </label>
                   <select
+                    id="submit-spicy-level"
+                    name="spicyLevel"
                     value={formData.spicyLevel}
                     onChange={(e) => setFormData({ ...formData, spicyLevel: Number(e.target.value) })}
                     className="w-full text-xs bg-amber-50/50 border border-amber-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 font-bold"
@@ -257,10 +267,12 @@ export const SubmitShopPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-price-per-plate" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Price per Plate (INR)
                   </label>
                   <input
+                    id="submit-price-per-plate"
+                    name="pricePerPlate"
                     type="number"
                     value={formData.pricePerPlate}
                     onChange={(e) => setFormData({ ...formData, pricePerPlate: e.target.value })}
@@ -269,10 +281,12 @@ export const SubmitShopPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label htmlFor="submit-is-chulhivarchi" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                     Wood Stove (Chulhivarchi)
                   </label>
                   <select
+                    id="submit-is-chulhivarchi"
+                    name="isChulhivarchi"
                     value={formData.isChulhivarchi}
                     onChange={(e) => setFormData({ ...formData, isChulhivarchi: e.target.value === 'true' })}
                     className="w-full text-xs bg-amber-50/50 border border-amber-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 font-bold"
@@ -284,10 +298,12 @@ export const SubmitShopPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label htmlFor="submit-address" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Full Address *
                 </label>
                 <textarea
+                  id="submit-address"
+                  name="address"
                   required
                   rows={2}
                   placeholder="Street address, landmark, near Someshwar..."
@@ -298,10 +314,12 @@ export const SubmitShopPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label htmlFor="submit-image-url" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Main Photo Image URL
                 </label>
                 <input
+                  id="submit-image-url"
+                  name="imageUrl"
                   type="url"
                   placeholder="https://images.unsplash.com/..."
                   value={formData.imageUrl}
@@ -311,10 +329,12 @@ export const SubmitShopPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label htmlFor="submit-sponsorship-tier" className="block text-xs font-bold text-slate-700 uppercase mb-1">
                   Sponsorship Tier
                 </label>
                 <select
+                  id="submit-sponsorship-tier"
+                  name="sponsorshipTier"
                   value={formData.sponsorshipTier}
                   onChange={(e) => setFormData({ ...formData, sponsorshipTier: e.target.value })}
                   className="w-full text-xs bg-amber-50/50 border border-amber-200 rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 font-bold"

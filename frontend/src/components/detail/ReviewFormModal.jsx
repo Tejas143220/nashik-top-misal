@@ -92,10 +92,12 @@ export const ReviewFormModal = ({ shopId, shopName, isOpen, onClose, onSuccess }
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1 flex items-center gap-1">
+            <label htmlFor="review-spice-rating" className="block text-xs font-bold text-slate-700 uppercase mb-1 flex items-center gap-1">
               <Flame className="w-3.5 h-3.5 text-brand-600" /> Spice Kick Level (1 to 5)
             </label>
             <input
+              id="review-spice-rating"
+              name="spiceRating"
               type="range"
               min="1"
               max="5"
@@ -111,10 +113,12 @@ export const ReviewFormModal = ({ shopId, shopName, isOpen, onClose, onSuccess }
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+            <label htmlFor="review-reviewer-name" className="block text-xs font-bold text-slate-700 uppercase mb-1">
               Your Name *
             </label>
             <input
+              id="review-reviewer-name"
+              name="reviewerName"
               type="text"
               required
               placeholder="e.g. Rahul Sharma"
@@ -126,10 +130,12 @@ export const ReviewFormModal = ({ shopId, shopName, isOpen, onClose, onSuccess }
 
           {/* 📸 Review Thali Photo Input */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1 flex items-center gap-1">
+            <label htmlFor="review-image-url" className="block text-xs font-bold text-slate-700 uppercase mb-1 flex items-center gap-1">
               <Camera className="w-3.5 h-3.5 text-brand-600" /> Attach Misal Thali Photo URL (Optional)
             </label>
             <input
+              id="review-image-url"
+              name="imageUrl"
               type="url"
               placeholder="https://images.unsplash.com/... or image link"
               value={imageUrl}
@@ -139,10 +145,12 @@ export const ReviewFormModal = ({ shopId, shopName, isOpen, onClose, onSuccess }
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+            <label htmlFor="review-comment" className="block text-xs font-bold text-slate-700 uppercase mb-1">
               Your Review & Feedback *
             </label>
             <textarea
+              id="review-comment"
+              name="comment"
               required
               rows={3}
               placeholder="How was the tari sample, farsan freshness, and seating ambience?"

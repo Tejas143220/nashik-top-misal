@@ -54,9 +54,11 @@ export const UserProfileModal = ({ isOpen, onClose }) => {
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           <div>
-            <label className="block text-xs font-extrabold text-slate-700 mb-1">Your Full Name *</label>
+            <label htmlFor="user-profile-fullname" className="block text-xs font-extrabold text-slate-700 mb-1">Your Full Name *</label>
             <div className="relative">
               <input
+                id="user-profile-fullname"
+                name="fullName"
                 type="text"
                 required
                 placeholder="e.g. Tejas Thakare"
@@ -69,9 +71,11 @@ export const UserProfileModal = ({ isOpen, onClose }) => {
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-slate-700 mb-1">Email Address (Optional)</label>
+            <label htmlFor="user-profile-email" className="block text-xs font-extrabold text-slate-700 mb-1">Email Address (Optional)</label>
             <div className="relative">
               <input
+                id="user-profile-email"
+                name="email"
                 type="email"
                 placeholder="tejas@example.com"
                 value={email}

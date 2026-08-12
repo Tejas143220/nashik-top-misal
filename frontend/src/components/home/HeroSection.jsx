@@ -114,7 +114,10 @@ export const HeroSection = () => {
             <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-white/90 rounded-2xl sm:rounded-xl">
               <Search className="w-5 h-5 text-brand-600 shrink-0" />
               <input
+                id="hero-search-input"
+                name="searchQuery"
                 type="text"
+                aria-label="Search Misal Joints"
                 placeholder="Search Sadhana, Grape Embassy, Panchavati..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -126,6 +129,9 @@ export const HeroSection = () => {
             <div className="flex items-center gap-1.5 px-3 py-2 bg-white/90 rounded-2xl sm:rounded-xl">
               <MapPin className="w-4 h-4 text-orange-600 shrink-0" />
               <select
+                id="hero-area-select"
+                name="selectedArea"
+                aria-label="Select Area in Nashik"
                 value={selectedArea}
                 onChange={(e) => setSelectedArea(e.target.value)}
                 className="w-full text-xs font-bold text-slate-900 focus:outline-none bg-transparent cursor-pointer"
@@ -143,6 +149,9 @@ export const HeroSection = () => {
             <div className="flex items-center gap-1.5 px-3 py-2 bg-white/90 rounded-2xl sm:rounded-xl">
               <Flame className="w-4 h-4 text-red-600 shrink-0" />
               <select
+                id="hero-spice-select"
+                name="spicyLevel"
+                aria-label="Select Spicy Level"
                 value={spicyLevel !== null ? spicyLevel : ''}
                 onChange={(e) => setSpicyLevel(e.target.value ? Number(e.target.value) : null)}
                 className="w-full text-xs font-bold text-slate-900 focus:outline-none bg-transparent cursor-pointer"

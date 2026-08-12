@@ -167,9 +167,11 @@ export const MisalQuizModal = ({ isOpen, onClose }) => {
               className="space-y-4"
             >
               <span className="text-[10px] font-bold uppercase text-brand-600 tracking-wider">Question 3 of 3</span>
-              <h4 className="text-base font-extrabold text-slate-800">Select area in Nashik (Optional)</h4>
+              <label htmlFor="quiz-area-select" className="text-base font-extrabold text-slate-800 block">Select area in Nashik (Optional)</label>
 
               <select
+                id="quiz-area-select"
+                name="quizArea"
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
                 className="w-full text-xs font-semibold bg-amber-50/50 border border-amber-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-brand-500"

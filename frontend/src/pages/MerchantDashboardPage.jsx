@@ -138,9 +138,11 @@ export const MerchantDashboardPage = () => {
 
             <form onSubmit={handleLogin} className="space-y-4 text-left">
               <div>
-                <label className="block text-xs font-black uppercase text-slate-500 dark:text-slate-400 mb-1">Merchant Security PIN *</label>
+                <label htmlFor="merchant-pin-input" className="block text-xs font-black uppercase text-slate-500 dark:text-slate-400 mb-1">Merchant Security PIN *</label>
                 <div className="relative">
                   <input
+                    id="merchant-pin-input"
+                    name="merchantPin"
                     type="password"
                     maxLength={4}
                     placeholder="Enter PIN (Demo: 7058)"
@@ -218,8 +220,10 @@ export const MerchantDashboardPage = () => {
 
           <form onSubmit={handleUpdateCrowdStatus} className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold text-amber-200 uppercase mb-1">Select Misal Shop *</label>
+              <label htmlFor="merchant-shop-select" className="block text-xs font-bold text-amber-200 uppercase mb-1">Select Misal Shop *</label>
               <select
+                id="merchant-shop-select"
+                name="merchantShopId"
                 value={selectedShopId}
                 onChange={(e) => setSelectedShopId(e.target.value)}
                 className="w-full text-xs font-bold bg-slate-800 border border-amber-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -233,9 +237,11 @@ export const MerchantDashboardPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-amber-200 uppercase mb-1">Current Wait Time (Mins) *</label>
+              <label htmlFor="merchant-crowd-wait-mins" className="block text-xs font-bold text-amber-200 uppercase mb-1">Current Wait Time (Mins) *</label>
               <div className="relative">
                 <input
+                  id="merchant-crowd-wait-mins"
+                  name="crowdWaitMins"
                   type="number"
                   min="0"
                   max="120"
@@ -304,8 +310,11 @@ export const MerchantDashboardPage = () => {
           <form onSubmit={handleVerify} className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
               <input
+                id="merchant-voucher-code-input"
+                name="voucherCode"
                 type="text"
                 required
+                aria-label="Voucher Code"
                 placeholder="Enter Voucher Code (e.g. PERACHI-WADI-FREE-SOLKADHI-888)"
                 value={voucherCode}
                 onChange={(e) => setVoucherCode(e.target.value.toUpperCase())}

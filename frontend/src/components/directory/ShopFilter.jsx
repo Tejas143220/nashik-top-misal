@@ -84,10 +84,12 @@ export const ShopFilter = () => {
 
       {/* Sort By */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+        <label htmlFor="filter-sort-by" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
           Sort Results By
         </label>
         <select
+          id="filter-sort-by"
+          name="sortBy"
           value={isNearMeActive ? 'nearby' : sortBy}
           onChange={(e) => {
             if (e.target.value === 'nearby') {
@@ -153,10 +155,12 @@ export const ShopFilter = () => {
 
       {/* Area Filter */}
       <div>
-        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1">
+        <label htmlFor="filter-area-select" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1">
           <MapPin className="w-3.5 h-3.5 text-brand-600" /> Select Area in Nashik
         </label>
         <select
+          id="filter-area-select"
+          name="selectedArea"
           value={selectedArea}
           onChange={(e) => setSelectedArea(e.target.value)}
           className="w-full text-xs font-semibold bg-amber-50/70 border border-amber-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
@@ -173,10 +177,12 @@ export const ShopFilter = () => {
       {/* Amenities / Activities */}
       {(Array.isArray(activities) ? activities : []).length > 0 && (
         <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+          <label htmlFor="filter-activity-select" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
             Special Facilities
           </label>
           <select
+            id="filter-activity-select"
+            name="activitySlug"
             value={activitySlug}
             onChange={(e) => setActivitySlug(e.target.value)}
             className="w-full text-xs font-semibold bg-amber-50/70 border border-amber-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"

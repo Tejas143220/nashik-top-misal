@@ -266,7 +266,10 @@ export const MisalAIChatbot = () => {
             {/* Input Form Footer */}
             <form onSubmit={handleFormSubmit} className="p-3 bg-white border-t border-amber-200 flex gap-2">
               <input
+                id="chatbot-message-input"
+                name="chatMessage"
                 type="text"
+                aria-label="Ask Misal AI Chatbot"
                 placeholder="Ask anything: e.g. history, spicy, garden, timing..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}

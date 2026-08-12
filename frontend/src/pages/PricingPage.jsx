@@ -332,10 +332,12 @@ export const PricingPage = () => {
 
               <div className="pt-4 space-y-2">
                 <div className="flex justify-between text-xs font-bold">
-                  <span>Monthly Directory Views</span>
+                  <label htmlFor="pricing-monthly-views-range">Monthly Directory Views</label>
                   <span className="text-amber-400 text-base">{monthlyViews.toLocaleString('en-IN')} Views/mo</span>
                 </div>
                 <input
+                  id="pricing-monthly-views-range"
+                  name="monthlyViews"
                   type="range"
                   min="2000"
                   max="30000"
@@ -424,8 +426,10 @@ export const PricingPage = () => {
                 {/* Shop & Contact Details */}
                 <div className="bg-amber-50/60 p-4 rounded-2xl border border-amber-200 space-y-3">
                   <div>
-                    <label className="block text-xs font-black uppercase text-slate-600 mb-1">Select Your Misal Shop *</label>
+                    <label htmlFor="pricing-shop-select" className="block text-xs font-black uppercase text-slate-600 mb-1">Select Your Misal Shop *</label>
                     <select
+                      id="pricing-shop-select"
+                      name="pricingShopId"
                       value={selectedShopId}
                       onChange={(e) => setSelectedShopId(e.target.value)}
                       required
@@ -440,8 +444,10 @@ export const PricingPage = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-slate-600 mb-1">Contact Person Name *</label>
+                      <label htmlFor="pricing-contact-name" className="block text-xs font-bold text-slate-600 mb-1">Contact Person Name *</label>
                       <input
+                        id="pricing-contact-name"
+                        name="contactName"
                         type="text"
                         placeholder="Owner Name"
                         value={contactName}
@@ -451,8 +457,10 @@ export const PricingPage = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-600 mb-1">Phone Number *</label>
+                      <label htmlFor="pricing-contact-phone" className="block text-xs font-bold text-slate-600 mb-1">Phone Number *</label>
                       <input
+                        id="pricing-contact-phone"
+                        name="contactPhone"
                         type="tel"
                         placeholder="10-digit mobile"
                         value={contactPhone}
@@ -538,8 +546,10 @@ export const PricingPage = () => {
                         <span className="flex items-center gap-1 text-emerald-600"><Lock className="w-3 h-3" /> 256-Bit Encrypted</span>
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 mb-1">Cardholder Name *</label>
+                        <label htmlFor="pricing-card-name" className="block text-[11px] font-bold text-slate-600 mb-1">Cardholder Name *</label>
                         <input
+                          id="pricing-card-name"
+                          name="cardName"
                           type="text"
                           placeholder="Name on card"
                           value={cardName}
@@ -548,8 +558,10 @@ export const PricingPage = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 mb-1">Card Number *</label>
+                        <label htmlFor="pricing-card-number" className="block text-[11px] font-bold text-slate-600 mb-1">Card Number *</label>
                         <input
+                          id="pricing-card-number"
+                          name="cardNumber"
                           type="text"
                           maxLength={19}
                           placeholder="4532 •••• •••• 8821"
@@ -560,8 +572,10 @@ export const PricingPage = () => {
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-600 mb-1">Expiry Date *</label>
+                          <label htmlFor="pricing-card-expiry" className="block text-[11px] font-bold text-slate-600 mb-1">Expiry Date *</label>
                           <input
+                            id="pricing-card-expiry"
+                            name="cardExpiry"
                             type="text"
                             placeholder="MM/YY"
                             maxLength={5}
@@ -571,8 +585,10 @@ export const PricingPage = () => {
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-slate-600 mb-1">CVV / CVC *</label>
+                          <label htmlFor="pricing-card-cvv" className="block text-[11px] font-bold text-slate-600 mb-1">CVV / CVC *</label>
                           <input
+                            id="pricing-card-cvv"
+                            name="cardCvv"
                             type="password"
                             maxLength={3}
                             placeholder="•••"
@@ -589,8 +605,10 @@ export const PricingPage = () => {
                   {paymentTab === 'utr' && (
                     <div className="bg-amber-50/60 p-4 rounded-2xl border border-amber-200 space-y-3">
                       <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">PhonePe / GPay 12-Digit UTR Number *</label>
+                        <label htmlFor="pricing-txn-ref" className="block text-xs font-bold text-slate-700 mb-1">PhonePe / GPay 12-Digit UTR Number *</label>
                         <input
+                          id="pricing-txn-ref"
+                          name="txnRef"
                           type="text"
                           placeholder="e.g. 123456789012"
                           value={txnRef}
@@ -707,9 +725,12 @@ export const PricingPage = () => {
 
             <form onSubmit={handleVerifyOtp} className="space-y-4">
               <input
+                id="pricing-otp-input"
+                name="otpInput"
                 type="text"
                 maxLength={6}
                 required
+                aria-label="Enter 6-digit OTP"
                 placeholder="Enter 6-digit OTP (Demo: 123456)"
                 value={otpInput}
                 onChange={(e) => setOtpInput(e.target.value)}
