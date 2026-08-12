@@ -50,7 +50,9 @@ export const ShopList = () => {
     );
   }
 
-  if (shopsData.items.length === 0) {
+  const itemsList = Array.isArray(shopsData?.items) ? shopsData.items : [];
+
+  if (itemsList.length === 0) {
     return (
       <div className="min-h-[400px] bg-white rounded-2xl border border-dashed border-amber-300 p-8 text-center flex flex-col items-center justify-center space-y-3">
         <Frown className="w-12 h-12 text-amber-500" />
@@ -68,8 +70,8 @@ export const ShopList = () => {
     <div className="space-y-8">
       {/* Search Result Count */}
       <div className="flex items-center justify-between text-xs font-bold text-slate-600 bg-amber-100/50 px-4 py-2 rounded-xl border border-amber-200/60">
-        <span>Showing {shopsData.items.length} of {shopsData.total} Misal Joints</span>
-        {shopsData.items.some((s) => s.is_sponsored) && (
+        <span>Showing {itemsList.length} of {shopsData?.total || itemsList.length} Misal Joints</span>
+        {itemsList.some((s) => s.is_sponsored) && (
           <span className="text-amber-800 font-extrabold flex items-center gap-1">
             <Flame className="w-3.5 h-3.5 text-brand-600 fill-brand-600" /> Featured Placements Active
           </span>

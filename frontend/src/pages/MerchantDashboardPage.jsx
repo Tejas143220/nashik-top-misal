@@ -407,7 +407,7 @@ export const MerchantDashboardPage = () => {
           <div className="bg-white rounded-3xl p-6 sm:p-8 border border-amber-200 shadow-sm space-y-4">
             <h3 className="text-lg font-black text-slate-900">Recent Voucher Redemptions Today</h3>
             
-            {analytics.recent_redemptions.length === 0 ? (
+            {(Array.isArray(analytics?.recent_redemptions) ? analytics.recent_redemptions : []).length === 0 ? (
               <p className="text-xs text-slate-500 italic">No vouchers redeemed yet today.</p>
             ) : (
               <div className="overflow-x-auto">

@@ -28,9 +28,9 @@ export const TopFiveRankCardModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const shopMap = {};
-  allShops.forEach((s) => { shopMap[s.id] = s; });
+  (Array.isArray(allShops) ? allShops : []).forEach((s) => { shopMap[s.id] = s; });
 
-  const rankedShops = rankedShopIds.map((id) => shopMap[id]).filter(Boolean);
+  const rankedShops = (Array.isArray(rankedShopIds) ? rankedShopIds : []).map((id) => shopMap[id]).filter(Boolean);
   const userName = passport?.user_name || 'Nashik Foodie';
 
   const handleAddShop = (id) => {

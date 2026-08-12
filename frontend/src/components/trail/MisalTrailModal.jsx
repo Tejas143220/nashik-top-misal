@@ -79,7 +79,7 @@ export const MisalTrailModal = ({ isOpen, onClose }) => {
     ? (selectedTrail?.shops || [])
     : (customResult?.trail_stops || []);
 
-  const polylineCoords = currentDisplayShops.map((s) => [s.latitude || 20.0059, s.longitude || 73.7898]);
+  const polylineCoords = (Array.isArray(currentDisplayShops) ? currentDisplayShops : []).map((s) => [s.latitude || 20.0059, s.longitude || 73.7898]);
   const centerLat = polylineCoords.length > 0 ? polylineCoords[0][0] : 20.015;
   const centerLng = polylineCoords.length > 0 ? polylineCoords[0][1] : 73.765;
 

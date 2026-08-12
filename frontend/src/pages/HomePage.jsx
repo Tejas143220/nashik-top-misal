@@ -95,7 +95,7 @@ export const HomePage = () => {
               to="/directory"
               className="text-xs font-extrabold text-brand-600 hover:text-brand-700 flex items-center gap-1 group"
             >
-              View All Misal Joints ({featuredShops.length}+)
+              View All Misal Joints ({(Array.isArray(featuredShops) ? featuredShops : []).length}+)
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

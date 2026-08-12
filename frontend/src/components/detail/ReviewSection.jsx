@@ -24,7 +24,7 @@ export const ReviewSection = ({ reviews = [], avgRating = 0, totalReviews = 0, o
       </div>
 
       {/* Reviews List */}
-      {reviews.length === 0 ? (
+      {(!Array.isArray(reviews) || reviews.length === 0) ? (
         <div className="p-8 text-center bg-amber-50/50 rounded-2xl border border-dashed border-amber-200 space-y-2">
           <p className="text-xs font-bold text-slate-600">Be the first to review this Misal joint!</p>
           <p className="text-[11px] text-slate-500">Share your experience about spice, taste, and thali photos.</p>

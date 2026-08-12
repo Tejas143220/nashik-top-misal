@@ -8,8 +8,8 @@ export const PassportCard = ({ passport }) => {
   const [isTopFiveOpen, setIsTopFiveOpen] = useState(false);
 
   const userName = passport?.user_name || "Nashik Foodie";
-  const stampsList = passport?.stamps || [];
-  const badgesList = passport?.badges || [];
+  const stampsList = Array.isArray(passport?.stamps) ? passport.stamps : [];
+  const badgesList = Array.isArray(passport?.badges) ? passport.badges : [];
   const totalStamps = passport?.total_stamps || stampsList.length || 0;
 
   // Level Rank Calculation
