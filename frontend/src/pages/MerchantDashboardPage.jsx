@@ -309,6 +309,7 @@ export const MerchantDashboardPage = () => {
 
           <form onSubmit={handleVerify} className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
+              <label htmlFor="merchant-voucher-code-input" className="sr-only">Customer Voucher Code</label>
               <input
                 id="merchant-voucher-code-input"
                 name="voucherCode"

@@ -265,6 +265,7 @@ export const MisalAIChatbot = () => {
 
             {/* Input Form Footer */}
             <form onSubmit={handleFormSubmit} className="p-3 bg-white border-t border-amber-200 flex gap-2">
+              <label htmlFor="chatbot-message-input" className="sr-only">Ask Misal AI Chatbot</label>
               <input
                 id="chatbot-message-input"
                 name="chatMessage"

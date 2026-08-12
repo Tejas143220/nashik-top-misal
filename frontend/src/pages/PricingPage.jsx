@@ -724,6 +724,7 @@ export const PricingPage = () => {
             </div>
 
             <form onSubmit={handleVerifyOtp} className="space-y-4">
+              <label htmlFor="pricing-otp-input" className="sr-only">Enter 6-digit OTP</label>
               <input
                 id="pricing-otp-input"
                 name="otpInput"

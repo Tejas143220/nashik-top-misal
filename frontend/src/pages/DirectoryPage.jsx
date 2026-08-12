@@ -32,6 +32,7 @@ export const DirectoryPage = () => {
           {/* Live Search Input */}
           <div className="relative min-w-[280px] sm:min-w-[340px]">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <label htmlFor="directory-search-input" className="sr-only">Search by shop name, area or landmark</label>
             <input
               id="directory-search-input"
               name="directorySearch"

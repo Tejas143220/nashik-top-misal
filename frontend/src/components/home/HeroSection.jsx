@@ -113,6 +113,7 @@ export const HeroSection = () => {
             {/* Search Input */}
             <div className="flex-1 flex items-center gap-2 px-3 py-2 bg-white/90 rounded-2xl sm:rounded-xl">
               <Search className="w-5 h-5 text-brand-600 shrink-0" />
+              <label htmlFor="hero-search-input" className="sr-only">Search Misal Joints</label>
               <input
                 id="hero-search-input"
                 name="searchQuery"
@@ -128,6 +129,7 @@ export const HeroSection = () => {
             {/* Location Dropdown */}
             <div className="flex items-center gap-1.5 px-3 py-2 bg-white/90 rounded-2xl sm:rounded-xl">
               <MapPin className="w-4 h-4 text-orange-600 shrink-0" />
+              <label htmlFor="hero-area-select" className="sr-only">Select Area in Nashik</label>
               <select
                 id="hero-area-select"
                 name="selectedArea"
@@ -148,6 +150,7 @@ export const HeroSection = () => {
             {/* Spicy Level Dropdown */}
             <div className="flex items-center gap-1.5 px-3 py-2 bg-white/90 rounded-2xl sm:rounded-xl">
               <Flame className="w-4 h-4 text-red-600 shrink-0" />
+              <label htmlFor="hero-spice-select" className="sr-only">Select Spicy Level</label>
               <select
                 id="hero-spice-select"
                 name="spicyLevel"
