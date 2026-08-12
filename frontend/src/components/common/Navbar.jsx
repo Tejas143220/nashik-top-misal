@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Flame, UtensilsCrossed, PlusCircle, Menu, X, Sparkles, Stamp, MapPin, Globe, Navigation, User, Camera } from 'lucide-react';
+import { Flame, UtensilsCrossed, PlusCircle, Menu, X, Sparkles, Stamp, MapPin, Globe, Navigation, User, Camera, Sun, Moon } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import MisalQuizModal from '../quiz/MisalQuizModal';
 import MapViewModal from '../map/MapViewModal';
 import MisalTrailModal from '../trail/MisalTrailModal';
@@ -21,6 +22,7 @@ export const Navbar = () => {
   const location = useLocation();
   const { lang, toggleLanguage } = useLanguage();
   const { passport } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     fetchShops({ limit: 50 }).then((res) => setShops(res.items || [])).catch(() => {});
@@ -28,7 +30,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-amber-200/80 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-amber-200/80 dark:border-slate-800 shadow-sm transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo */}
@@ -37,10 +39,10 @@ export const Navbar = () => {
                 <Flame className="w-6 h-6 fill-amber-200" />
               </div>
               <div>
-                <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-brand-700 via-orange-600 to-amber-600 bg-clip-text text-transparent">
+                <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-brand-700 via-orange-600 to-amber-600 dark:from-amber-400 dark:to-orange-400 bg-clip-text text-transparent">
                   Nashik's Best Misal
                 </span>
-                <span className="hidden sm:block text-[10px] uppercase font-bold text-amber-700 tracking-wider">
+                <span className="hidden sm:block text-[10px] uppercase font-bold text-amber-700 dark:text-amber-400 tracking-wider">
                   Open Directory • Passport • Map
                 </span>
               </div>
@@ -48,6 +50,14 @@ export const Navbar = () => {
 
             {/* Navigation Links */}
             <nav className="hidden lg:flex items-center gap-3">
+              <button
+                onClick={toggleTheme}
+                className="p-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-300 dark:border-slate-700 cursor-pointer"
+                title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              >
+                {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+              </button>
+
               <button
                 onClick={toggleLanguage}
                 className="text-xs font-black text-white bg-slate-900 hover:bg-slate-800 px-3 py-1.5 rounded-full border border-slate-700 flex items-center gap-1.5 transition-all transform hover:scale-105 cursor-pointer shadow-sm"

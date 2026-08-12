@@ -399,6 +399,21 @@ def seed_database():
         db.add_all(contest_entries)
         db.commit()
 
+        # Synchronize PostgreSQL primary key sequences if running on PostgreSQL
+        if engine.dialect.name == "postgresql":
+            from sqlalchemy import text
+            tables = [
+                "misal_shops", "shop_images", "activities", "reviews", 
+                "ad_placements", "users", "passport_badges", "user_passport_stamps", 
+                "misal_battles", "battle_votes", "coupon_claims", "queue_checkins"
+            ]
+            for table in tables:
+                try:
+                    db.execute(text(f"SELECT setval(pg_get_serial_sequence('{table}', 'id'), COALESCE((SELECT MAX(id) FROM {table}), 1));"))
+                except Exception as seq_err:
+                    print(f"Sequence sync note for {table}: {seq_err}")
+            db.commit()
+
         print("Database Schema & Seeding Completed Successfully!")
 
     except Exception as e:

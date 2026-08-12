@@ -1,6 +1,6 @@
 import os
 from typing import List, Union
-from pydantic import AnyHttpUrl
+from pydantic import AnyHttpUrl, field_validator
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -12,6 +12,12 @@ class Settings(BaseSettings):
         "DATABASE_URL", 
         "sqlite:///./nashik_misal.db"
     )
+
+    @field_validator("DATABASE_URL", mode="before")
+    def assemble_db_connection(cls, v: str) -> str:
+        if isinstance(v, str) and v.startswith("postgres://"):
+            return v.replace("postgres://", "postgresql://", 1)
+        return v
     
     # CORS Origins
     BACKEND_CORS_ORIGINS: List[str] = [
@@ -26,3 +32,4 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 settings = Settings()
+

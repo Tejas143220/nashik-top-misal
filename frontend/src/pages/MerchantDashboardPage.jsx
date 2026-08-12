@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import SEOHead from '../components/seo/SEOHead';
-import { Search, ShieldCheck, CheckCircle2, AlertCircle, XCircle, Key, RefreshCw, Ticket, TrendingUp, Store } from 'lucide-react';
+import { Search, ShieldCheck, CheckCircle2, AlertCircle, XCircle, Key, RefreshCw, Ticket, TrendingUp, Store, Clock, Users } from 'lucide-react';
 import axios from 'axios';
 import triggerConfetti from '../components/animations/ConfettiBurst';
+import { fetchShops } from '../services/api';
 
 export const MerchantDashboardPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -19,10 +20,22 @@ export const MerchantDashboardPage = () => {
 
   const [analytics, setAnalytics] = useState(null);
 
+  // Live Crowd Status Update State
+  const [shopsList, setShopsList] = useState([]);
+  const [selectedShopId, setSelectedShopId] = useState(1);
+  const [crowdWaitMins, setCrowdWaitMins] = useState(15);
+  const [crowdComment, setCrowdComment] = useState('');
+  const [updatingCrowd, setUpdatingCrowd] = useState(false);
+  const [crowdSuccessMsg, setCrowdSuccessMsg] = useState('');
+
   const fetchAnalytics = useCallback(async () => {
     try {
       const { data } = await axios.get('/api/v1/merchant/analytics');
       setAnalytics(data);
+      const shopsData = await fetchShops({ limit: 50 });
+      if (shopsData?.items?.length) {
+        setShopsList(shopsData.items);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -88,23 +101,44 @@ export const MerchantDashboardPage = () => {
     }
   };
 
+  const handleUpdateCrowdStatus = async (e) => {
+    e.preventDefault();
+    setUpdatingCrowd(true);
+    setCrowdSuccessMsg('');
+    try {
+      const { data } = await axios.post('/api/v1/queue/checkin', {
+        shop_id: Number(selectedShopId),
+        reporter_name: 'Shop Owner / Manager',
+        wait_time_mins: Number(crowdWaitMins),
+        comment: crowdComment || 'Live status updated by shop management'
+      });
+      setCrowdSuccessMsg(data.message || 'Live Crowd Status Updated!');
+      triggerConfetti();
+      fetchAnalytics();
+    } catch (err) {
+      alert('Failed to update crowd status.');
+    } finally {
+      setUpdatingCrowd(false);
+    }
+  };
+
   if (!isAuthenticated) {
     return (
       <>
         <SEOHead title="Merchant Portal Login - Nashik's Best Misal" description="Shop manager login for verifying customer discount vouchers." />
         <div className="max-w-md mx-auto px-4 py-20">
-          <div className="bg-white rounded-3xl p-8 border border-amber-200 shadow-2xl space-y-6 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-amber-100 text-brand-600 flex items-center justify-center mx-auto border border-amber-300">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-amber-200 dark:border-slate-800 shadow-2xl space-y-6 text-center">
+            <div className="w-16 h-16 rounded-2xl bg-amber-100 dark:bg-slate-800 text-brand-600 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-300 dark:border-slate-700">
               <Store className="w-8 h-8" />
             </div>
             <div className="space-y-2">
-              <h1 className="text-2xl font-black text-slate-900 tracking-tight">Merchant Portal Access</h1>
-              <p className="text-xs text-slate-500">Enter your 4-digit Merchant PIN to manage customer coupon redemptions.</p>
+              <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Merchant Portal Access</h1>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Enter your 4-digit Merchant PIN to manage customer coupon redemptions & live crowd meters.</p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4 text-left">
               <div>
-                <label className="block text-xs font-black uppercase text-slate-500 mb-1">Merchant Security PIN *</label>
+                <label className="block text-xs font-black uppercase text-slate-500 dark:text-slate-400 mb-1">Merchant Security PIN *</label>
                 <div className="relative">
                   <input
                     type="password"
@@ -112,7 +146,7 @@ export const MerchantDashboardPage = () => {
                     placeholder="Enter PIN (Demo: 7058)"
                     value={pinInput}
                     onChange={(e) => setPinInput(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 bg-amber-50/60 border border-amber-200 rounded-2xl text-center text-lg font-black tracking-widest text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full pl-10 pr-4 py-3 bg-amber-50/60 dark:bg-slate-800 border border-amber-200 dark:border-slate-700 rounded-2xl text-center text-lg font-black tracking-widest text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                   />
                   <Key className="w-5 h-5 text-amber-600 absolute left-3.5 top-3.5" />
                 </div>
@@ -148,17 +182,81 @@ export const MerchantDashboardPage = () => {
               <ShieldCheck className="w-3.5 h-3.5" /> Merchant Partner Portal
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              Coupon Redemption Dashboard 🏪
+              Merchant Management Dashboard 🏪
             </h1>
-            <p className="text-xs text-slate-400">Verify customer discount codes, mark deals redeemed, and track daily claims.</p>
+            <p className="text-xs text-slate-400">Update live queue crowd meters, verify customer vouchers, and manage shop analytics.</p>
           </div>
 
           <button
             onClick={() => { setIsAuthenticated(false); sessionStorage.removeItem('merchant_auth'); }}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-colors"
+            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-colors cursor-pointer"
           >
             Lock Dashboard 🔒
           </button>
+        </div>
+
+        {/* Live Crowd Meter Quick Switcher Card */}
+        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 border border-amber-500/30 shadow-xl space-y-5">
+          <div className="flex items-center justify-between border-b border-amber-500/20 pb-4">
+            <div className="flex items-center gap-2">
+              <Users className="w-6 h-6 text-amber-400" />
+              <div>
+                <h2 className="text-lg font-black text-white">Update Live Shop Crowd Meter</h2>
+                <p className="text-xs text-amber-200/80">Inform website visitors of real-time queue waiting times at your shop spot.</p>
+              </div>
+            </div>
+            <span className="text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 px-3 py-1 rounded-full border border-amber-500/30">
+              ⚡ Real-Time Sync
+            </span>
+          </div>
+
+          {crowdSuccessMsg && (
+            <div className="p-3 bg-emerald-500/20 border border-emerald-500/40 rounded-xl text-emerald-300 text-xs font-extrabold flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" /> {crowdSuccessMsg}
+            </div>
+          )}
+
+          <form onSubmit={handleUpdateCrowdStatus} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-amber-200 uppercase mb-1">Select Misal Shop *</label>
+              <select
+                value={selectedShopId}
+                onChange={(e) => setSelectedShopId(e.target.value)}
+                className="w-full text-xs font-bold bg-slate-800 border border-amber-500/40 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+              >
+                {shopsList.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name} ({s.area})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-amber-200 uppercase mb-1">Current Wait Time (Mins) *</label>
+              <div className="relative">
+                <input
+                  type="number"
+                  min="0"
+                  max="120"
+                  value={crowdWaitMins}
+                  onChange={(e) => setCrowdWaitMins(e.target.value)}
+                  className="w-full text-xs font-bold bg-slate-800 border border-amber-500/40 rounded-xl px-3 py-2.5 pl-9 text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                />
+                <Clock className="w-4 h-4 text-amber-400 absolute left-3 top-3" />
+              </div>
+            </div>
+
+            <div className="md:col-span-1 flex items-end">
+              <button
+                type="submit"
+                disabled={updatingCrowd}
+                className="w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-brand-600 hover:from-amber-600 hover:to-brand-700 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                {updatingCrowd ? <RefreshCw className="w-4 h-4 animate-spin" /> : 'Broadcast Live Status 📡'}
+              </button>
+            </div>
+          </form>
         </div>
 
         {/* Analytics Summary Bar */}

@@ -9,8 +9,8 @@ export const ShopHeader = ({ shop, onOpenReviewModal, onOpenQueueModal }) => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: shop.name,
-        text: `Check out ${shop.name} on Nashik's Best Misal directory!`,
+        title: `${shop.name} - Nashik's Best Misal`,
+        text: `🔥 Check out ${shop.name} in ${shop.area}, Nashik! Spicy Level: ${shop.spicy_level}/5 🌶️`,
         url: window.location.href,
       }).catch(() => {});
     } else {
@@ -19,8 +19,18 @@ export const ShopHeader = ({ shop, onOpenReviewModal, onOpenQueueModal }) => {
     }
   };
 
+  const handleWhatsAppShare = () => {
+    const text = encodeURIComponent(
+      `🔥 *${shop.name}* (${shop.area}, Nashik)\n` +
+      `🌶️ Spicy Level: ${shop.spicy_level}/5 | ⭐ Rating: ${shop.avg_rating} Stars\n` +
+      `📍 Address: ${shop.address}\n\n` +
+      `Check details & reviews here:\n${window.location.href}`
+    );
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+  };
+
   return (
-    <div className="bg-white rounded-3xl border border-amber-200 shadow-sm overflow-hidden space-y-6">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-amber-200 dark:border-slate-800 shadow-sm overflow-hidden space-y-6">
       {/* Media Hero */}
       <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-900">
         <img
@@ -45,13 +55,23 @@ export const ShopHeader = ({ shop, onOpenReviewModal, onOpenQueueModal }) => {
             )}
           </div>
 
-          <button
-            onClick={handleShare}
-            className="p-2 bg-white/80 hover:bg-white text-slate-800 rounded-full backdrop-blur-md transition-all shadow-md"
-            title="Share this Misal Spot"
-          >
-            <Share2 className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleWhatsAppShare}
+              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full text-xs font-black backdrop-blur-md transition-all shadow-md flex items-center gap-1 cursor-pointer"
+              title="Share on WhatsApp"
+            >
+              💬 WhatsApp Share
+            </button>
+
+            <button
+              onClick={handleShare}
+              className="p-2 bg-white/80 hover:bg-white text-slate-800 rounded-full backdrop-blur-md transition-all shadow-md cursor-pointer"
+              title="Share Link"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Hero Bottom Content */}

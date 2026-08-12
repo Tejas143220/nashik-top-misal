@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { FilterProvider } from './context/FilterContext';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -33,29 +34,31 @@ export const App = () => {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <LanguageProvider>
-            <FilterProvider>
-              <Router>
-                <div className="min-h-screen flex flex-col justify-between bg-amber-50/40 selection:bg-brand-500 selection:text-white relative">
-                  <div>
-                    <Navbar />
-                    <Routes>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/directory" element={<DirectoryPage />} />
-                      <Route path="/misal/:slug" element={<ShopDetailPage />} />
-                      <Route path="/passport" element={<PassportPage />} />
-                      <Route path="/submit-shop" element={<SubmitShopPage />} />
-                      <Route path="/pricing" element={<PricingPage />} />
-                      <Route path="/merchant/dashboard" element={<MerchantDashboardPage />} />
-                      <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
-                  </div>
-                  <Footer />
+            <ThemeProvider>
+              <FilterProvider>
+                <Router>
+                  <div className="min-h-screen flex flex-col justify-between bg-amber-50/40 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 selection:bg-brand-500 selection:text-white relative">
+                    <div>
+                      <Navbar />
+                      <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/directory" element={<DirectoryPage />} />
+                        <Route path="/misal/:slug" element={<ShopDetailPage />} />
+                        <Route path="/passport" element={<PassportPage />} />
+                        <Route path="/submit-shop" element={<SubmitShopPage />} />
+                        <Route path="/pricing" element={<PricingPage />} />
+                        <Route path="/merchant/dashboard" element={<MerchantDashboardPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                      </Routes>
+                    </div>
+                    <Footer />
 
-                  {/* Floating AI Misal Combo Assistant Widget */}
-                  <MisalAIChatbot />
-                </div>
-              </Router>
-            </FilterProvider>
+                    {/* Floating AI Misal Combo Assistant Widget */}
+                    <MisalAIChatbot />
+                  </div>
+                </Router>
+              </FilterProvider>
+            </ThemeProvider>
           </LanguageProvider>
         </AuthProvider>
       </QueryClientProvider>
@@ -64,3 +67,4 @@ export const App = () => {
 };
 
 export default App;
+
