@@ -59,24 +59,66 @@ const FALLBACK_SHOPS = [
     ]
   },
   {
-    id: 3,
-    name: "Perachi Wadi Misal",
-    slug: "perachi-wadi-misal-nashik",
-    tagline: "Garden Orchard Dining with Fresh Solkadhi",
-    description: "Family-friendly garden restaurant surrounded by guava trees.",
-    address: "Someshwar Waterfalls Road, Gangapur Road",
+    id: 4,
+    name: "Ambika Misal",
+    slug: "ambika-misal-panchavati-nashik",
+    tagline: "Authentic Black Spicy Gravy (Kala Rassa) Specialist",
+    description: "Famous Panchavati spot serving fiery black coconut gravy misal with crunchy farsan.",
+    address: "Panchavati Karanja, Nashik",
+    area: "Panchavati",
+    city: "Nashik",
+    phone: "09823045678",
+    price_per_plate: 100,
+    spicy_level: 5,
+    is_chulhivarchi: false,
+    is_sponsored: true,
+    sponsorship_tier: "gold",
+    crowd_status: "crowded",
+    avg_rating: 4.8,
+    total_reviews: 410,
+    main_image_url: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1200&q=80",
+    reviews: []
+  },
+  {
+    id: 5,
+    name: "Grape Embassy Misal",
+    slug: "grape-embassy-misal-nashik",
+    tagline: "Unique Vineyard Ambiance & Organic Jaggery Jalebi",
+    description: "Dine under grape vines with traditional wood stove chulha misal and fresh sugarcane juice.",
+    address: "Makhmalabad Road, Nashik",
     area: "Gangapur Road",
     city: "Nashik",
-    phone: "09765432100",
-    price_per_plate: 120,
-    spicy_level: 3,
+    phone: "09422255555",
+    price_per_plate: 150,
+    spicy_level: 4,
     is_chulhivarchi: true,
+    is_sponsored: true,
+    sponsorship_tier: "platinum",
+    crowd_status: "moderate",
+    avg_rating: 4.9,
+    total_reviews: 620,
+    main_image_url: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=1200&q=80",
+    reviews: []
+  },
+  {
+    id: 6,
+    name: "Vihar Misal",
+    slug: "vihar-misal-college-road-nashik",
+    tagline: "Mild & Flavourful Family Favorite since 1995",
+    description: "Located on College Road, known for rich mild sample, buttered pav, and kulfi dessert.",
+    address: "College Road, Opp. BYK College, Nashik",
+    area: "College Road",
+    city: "Nashik",
+    phone: "09890011223",
+    price_per_plate: 110,
+    spicy_level: 2,
+    is_chulhivarchi: false,
     is_sponsored: false,
     sponsorship_tier: "none",
     crowd_status: "low",
-    avg_rating: 4.7,
-    total_reviews: 180,
-    main_image_url: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80",
+    avg_rating: 4.6,
+    total_reviews: 240,
+    main_image_url: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=80",
     reviews: []
   }
 ];
@@ -86,10 +128,30 @@ export const fetchShops = async (params) => {
     const { data } = await api.get('/shops/', { params });
     return data;
   } catch (_err) {
-    // Return robust mock payload if backend is unreachable on Vercel
+    let list = [...FALLBACK_SHOPS];
+
+    if (params?.search) {
+      const q = params.search.toLowerCase();
+      list = list.filter(
+        (s) =>
+          s.name.toLowerCase().includes(q) ||
+          s.area.toLowerCase().includes(q) ||
+          s.tagline.toLowerCase().includes(q)
+      );
+    }
+    if (params?.area) {
+      list = list.filter((s) => s.area.toLowerCase() === params.area.toLowerCase());
+    }
+    if (params?.spicy_level !== undefined && params?.spicy_level !== null) {
+      list = list.filter((s) => s.spicy_level === Number(params.spicy_level));
+    }
+    if (params?.is_chulhivarchi !== undefined && params?.is_chulhivarchi !== null) {
+      list = list.filter((s) => s.is_chulhivarchi === Boolean(params.is_chulhivarchi));
+    }
+
     return {
-      items: FALLBACK_SHOPS,
-      total: FALLBACK_SHOPS.length,
+      items: list,
+      total: list.length,
       page: 1,
       pages: 1
     };
